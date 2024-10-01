@@ -16,4 +16,4 @@ streamlit run dashboard/dashboard.py
 
 ## Demo
 ![](assets/demo.gif)
-Or try it by yourself, just <a href="https://devtadanarsa-dicoding-da-sub.streamlit.app" target="_blank">click here!</a>
+<br>Or try it by yourself, just <a href="https://devtadanarsa-dicoding-da-sub.streamlit.app" target="_blank">click here!</a>
