@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
@@ -6,7 +7,9 @@ import data_transformer as dt
 import geopandas as gpd
 from shapely.geometry import Point
 
-data_all = pd.read_csv('main_data.csv')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+data_all = pd.read_csv(os.path.join(BASE_DIR, 'main_data.csv'))
 datetime_columns = ['order_delivered_customer_date', 'order_purchase_timestamp']
 for column in datetime_columns:
     data_all[column] = pd.to_datetime(data_all[column])
@@ -15,7 +18,7 @@ min_date = data_all["order_purchase_timestamp"].min()
 max_date = data_all["order_purchase_timestamp"].max()
 
 with st.sidebar:
-    st.image("logo.png")
+    st.image(os.path.join(BASE_DIR, 'logo.png'))
     
     min_year = min_date.year
     max_year = max_date.year
@@ -157,7 +160,7 @@ with geographyTab1:
     gdf = gpd.GeoDataFrame(customer_geolocations, geometry=geometry)
     gdf.set_crs(epsg=4326, inplace=True)
 
-    world = gpd.read_file('../data/naturalearth_lowres/naturalearth_lowres.shp')
+    world = gpd.read_file(os.path.join(BASE_DIR, '..', 'data', 'naturalearth_lowres', 'naturalearth_lowres.shp'))
     brazil = world[world.name == 'Brazil']
 
     fig, ax = plt.subplots(figsize=(12, 12))

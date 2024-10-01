@@ -1,4 +1,7 @@
 import pandas as pd
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def create_monthly_orders(data_all):
     monthly_orders = (
@@ -43,13 +46,13 @@ def spending_filtered(data_all):
     return spending_filtered
 
 def customer_geolocations(data_all):
-    geolocations = pd.read_csv('../data/geolocation.csv')
+    geolocations = pd.read_csv(os.path.join(BASE_DIR, '..', 'data', 'geolocation.csv'))
     geolocations = geolocations[geolocations['geolocation_zip_code_prefix'].isin(data_all['customer_zip_code_prefix'])]
     
     return geolocations
 
 def seller_geolocations(data_all):
-    geolocations = pd.read_csv('../data/geolocation.csv')
+    geolocations = pd.read_csv(os.path.join(BASE_DIR, '..', 'data', 'geolocation.csv'))
     geolocations = geolocations[geolocations['geolocation_zip_code_prefix'].isin(data_all['seller_zip_code_prefix'])]
     
     return geolocations
